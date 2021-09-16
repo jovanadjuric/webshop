@@ -1,6 +1,13 @@
 import Head from "next/head";
 import Title from "../components/Title";
-function HomePage() {
+import { getProducts } from "../lib/products";
+
+export async function getStaticProps() {
+  const products = await getProducts();
+  return { props: { products } };
+}
+
+function HomePage({ products }) {
   return (
     <>
       <Head>
@@ -8,7 +15,11 @@ function HomePage() {
       </Head>
       <main className="px-6 py-4">
         <Title>Next Shop</Title>
-        <p>[TODO: display products]</p>
+        <ul>
+          {products.map((product) => (
+            <li key={product.id}>{product.title}</li>
+          ))}
+        </ul>
       </main>
     </>
   );
