@@ -4,7 +4,7 @@ import { getProducts } from "../lib/products";
 
 export async function getStaticProps() {
   const products = await getProducts();
-  return { props: { products } };
+  return { props: { products }, revalidate: 30 };
 }
 
 function HomePage({ products }) {
