@@ -1,9 +1,8 @@
 import React from "react";
-import Head from "next/head";
 import Image from "next/image";
-import Title from "../../components/Title";
 import { getProduct, getProducts } from "../../lib/products";
 import { ApiError } from "../../lib/api";
+import Page from "../../components/Page";
 
 export async function getStaticPaths() {
   const products = await getProducts();
@@ -33,11 +32,7 @@ export async function getStaticProps({ params: { id } }) {
 function ProductPage({ product }) {
   return (
     <>
-      <Head>
-        <title>Next Shop</title>
-      </Head>
-      <main className="px-6 py-4">
-        <Title>{product.title}</Title>
+      <Page title={product.title}>
         <div className="flex flex-col lg:flex-row">
           <div>
             <Image src={product.pictureUrl} alt="" width={640} height={480} />
@@ -47,7 +42,7 @@ function ProductPage({ product }) {
             <p className="text-lg font-bold mt-2">{product.price}</p>
           </div>
         </div>
-      </main>
+      </Page>
     </>
   );
 }

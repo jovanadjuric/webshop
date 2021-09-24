@@ -1,7 +1,5 @@
-import Head from "next/head";
-import Link from "next/link";
+import Page from "../components/Page";
 import ProductCard from "../components/ProductCard";
-import Title from "../components/Title";
 import { getProducts } from "../lib/products";
 
 export async function getStaticProps() {
@@ -15,11 +13,7 @@ export async function getStaticProps() {
 function HomePage({ products }) {
   return (
     <>
-      <Head>
-        <title>Next Shop</title>
-      </Head>
-      <main className="px-6 py-4">
-        <Title>Next Shop</Title>
+      <Page title="Home">
         <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {products.map((product) => (
             <li key={product.id}>
@@ -27,7 +21,7 @@ function HomePage({ products }) {
             </li>
           ))}
         </ul>
-      </main>
+      </Page>
     </>
   );
 }
