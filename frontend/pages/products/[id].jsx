@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getProduct, getProducts } from "../../lib/products";
 import { ApiError } from "../../lib/api";
 import Page from "../../components/Page";
+import { useUser } from "../../hooks/user";
 
 export async function getStaticPaths() {
   const products = await getProducts();

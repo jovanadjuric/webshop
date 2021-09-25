@@ -1,26 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
-import { fetchJson } from "../lib/api";
+import { useSignOut, useUser } from "../hooks/user";
 
 function NavBar() {
-  const [user, setUser] = useState();
-  useEffect(() => {
-    (async () => {
-      try {
-        const user = await fetchJson("/api/user");
-        setUser(user);
-      } catch (err) {
-        //   not signed in
-      }
-    })();
-  }, []);
+  const user = useUser();
+  const signOut = useSignOut();
 
-  const handleSignOut = async () => {
-    await fetchJson("/api/logout");
-    setUser(undefined);
-  };
-
-  console.log("[NavBar] user:", user);
   return (
     <nav className="px-2 py-1">
       <ul className="flex gap-2">
@@ -32,7 +17,7 @@ function NavBar() {
         <li role="separator" className="flex-1" />
         <li>
           {user ? (
-            <button onClick={handleSignOut}>
+            <button onClick={signOut}>
               <a>{user.name} Sign Out</a>
             </button>
           ) : (
